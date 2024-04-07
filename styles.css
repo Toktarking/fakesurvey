@@ -1,0 +1,36 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+#given {
+    display:block;
+    border: 1px red solid;
+
+}
+
+#given input{
+    width: 250px;
+}
+
+h3 {
+    padding: 0;
+    margin: 0;
+}
+
+#show input{
+    width: 30px;
+    display: inline;
+}
+
+.valuesClass {
+    color: black;
+}
+
+table {
+    
+}
+
+td {
+    border: red solid 1px;
+}
