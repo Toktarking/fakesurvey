@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fake Survey 0.1</title>
+        <script type="text/javascript" src="main.js"></script>
+        <script type="text/javascript" src="\eel.js"></script>
+        <link rel="stylesheet" href="styles.css">
+        <script type="text/javascript" src="https:\\unpkg.com\xlsx@0.15.1\dist\xlsx.full.min.js"></script>
+    </head>
+    
+    <body>
+        
+        <div id="given">
+            <h3>Введите количество респондентов:</h3>
+            <input id="respondents" type='number' placeholder="Введите количество респондентов:" required="">
+            <h3>Введите количество переменных:</h3>
+            <input id="xvalues" type='number' placeholder="Введите количество переменных:" required="" min="1" max="10">
+            <h3>Введите количество связей:</h3>
+            <input id="relations" type='number' placeholder="Введите количество связей:" required="" min="1" max="3">
+        </div>
+        <button id="entering" onclick="enter()">Ввести</button>
+        <div id="showRelations">
+            <h3>Here will be showwwRelations</h3>
+            <p>ggggggggggggggg</p>
+        </div>
+        <div id="show">
+            <h3>Here will be showww</h3>
+            <p>Введите 2 буквы на латинице для обозначения каждой переменной и Y и слитно напшите сколько вопросов было задано</p>
+        </div>
+        <div id="showRelations">
+            <h3>Here will be showwwRelations</h3>
+            <p>ggggggggggggggg</p>
+        </div>
+        <button id="marking" onclick="marking()">Ввести</button>
+
+        <div id="table_info">
+            <h1>hello</h1>
+        </div>
+
+
+        <button id="hello" onclick="hello()">hello</button>
+        
+        <h3>Введите коэффициент дисперсии</h3>
+        <div id="dispersion_info">
+            <input id="dispersion_value" type='number' placeholder="Введите коэффициент дисперсии:" required="">
+        </div>
+        <div id='falsification_block'>
+            <button id="falsification" onclick="falsify()">falsify</button>
+        </div>
+
+
+    </body>
+</html>

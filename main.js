@@ -3,7 +3,10 @@
 async function enter() {
     var xvalues = document.getElementById("xvalues").value;
     var show = document.getElementById("show");
+    var relations = document.getElementById("relations").value;
+    var showRelations = document.getElementById("showRelations");
     var xvalues_number = Number(xvalues);
+    var relations = Number(relations);
 
     show.innerHTML = ""
 
@@ -15,7 +18,8 @@ async function enter() {
         input.setAttribute('placeholder', `X${i+1}`);
         input.setAttribute('class', 'valuesClass');
         show.appendChild(input);
-    }
+    };
+
     
     var input = document.createElement("input");
     input.setAttribute('type', 'text');
@@ -23,8 +27,15 @@ async function enter() {
     input.setAttribute('class', 'valuesClass');
     show.appendChild(input); 
 
+    for (let io=0; io < relations; io++) {
+        var div = document.createElement("div");
+        div.setAttribute('class', 'relationClass');
+        div.setAttribute('id', `rel${io}`);
+        showRelations.appendChild(div);
+    };
 
-}
+
+};
 
 
 async function marking() {
@@ -58,7 +69,8 @@ async function marking() {
     var loko = document.querySelectorAll(".valuesClass");
     loko.forEach(element => {
         initials = String(element.value).substring(0,2);
-        numbers = String(element.value).substring(2);
+        numbers = String(element.value).substring(2, 3);
+        relPosition = String(element.value).substring(4, 5);
         
         for (let i=0; i < Number(numbers); i++) {
             input_cell = document.createElement("input");
@@ -75,11 +87,29 @@ async function marking() {
             cell.innerHTML = `${initials}${i+1}`;
             cell2.appendChild(input_cell);
             count++;
+
+            
+            console.log('Here is rel:');
+            console.log(`rel${i}`);
+
+            console.log('Here is i:');
+            console.log(i);
+
+            if (i == relPosition-1) {
+
+                console.log("equal")
+                
+                var heretoput = document.getElementById(`rel${i}`);
+                var t = document.createTextNode(initials);
+                var text_place = document.createElement("p");
+                text_place.setAttribute("class", `svyaz${i+1}`)
+                text_place.appendChild(t);
+                heretoput.appendChild(text_place);
+            }
         };
 
-
-
     }); 
+    
     tableinfo.appendChild(table1);  
 }
 
@@ -98,7 +128,7 @@ async function falsify() {
             marko = Number(marko);
             stat_div = getRandomInt2();
 
-            res = getRandomInt(marko-polo, marko+polo, polo);
+            res = getRandomInt(marko-polo, marko+polo, marko);
             hello2(Number(res), row_number);
 
         };
@@ -108,7 +138,7 @@ async function falsify() {
 
 
 
-function getRandomInt(min, max, polo) {
+function getRandomInt(min, max, marko) {
     x = Math.random();
     x = Math.round(x*100);
     console.log("////////////////////");
@@ -122,8 +152,8 @@ function getRandomInt(min, max, polo) {
         max = Math.floor(max);
         console.log("a");
     } else {
-        min = min+polo;
-        max = min+polo;
+        min = marko;
+        max = marko;
         console.log("c");
     };
     num = Math.floor(Math.random()*(max-min + 1) + min);

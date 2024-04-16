@@ -34,3 +34,10 @@ table {
 td {
     border: red solid 1px;
 }
+
+.relationClass {
+    border: 5px solid darkblue;
+    height: 350px;
+    width: 250px;
+    display: inline-block;
+}
