@@ -41,3 +41,7 @@ td {
     width: 250px;
     display: inline-block;
 }
+
+.showrelations {
+    display: flex;
+}
