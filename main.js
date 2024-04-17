@@ -76,15 +76,21 @@ async function marking() {
             input_cell = document.createElement("input");
             input_cell.setAttribute('type', 'text');
             input_cell.setAttribute('placeholder', "");
-            input_cell.setAttribute('class', 'valuesClass');
+            
+            
             input_cell.setAttribute('id', `mr${count2+1}`);
             count2++;
             
             let row2 = table1.insertRow();
             row2.setAttribute('id', `row${count+2}`);
+
+            input_cell.setAttribute('class', 'valuesClass');
             let cell = row2.insertCell();
             let cell2 = row2.insertCell();
             cell.innerHTML = `${initials}${i+1}`;
+            if (initials == "dt"){
+                input_cell.setAttribute('class', 'valuesClass2');
+            } 
             cell2.appendChild(input_cell);
             count++;
 

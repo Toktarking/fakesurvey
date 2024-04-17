@@ -19,7 +19,7 @@ h3 {
 }
 
 #show input{
-    width: 30px;
+    width: 60px;
     display: inline;
 }
 
@@ -42,6 +42,10 @@ td {
     display: inline-block;
 }
 
-.showrelations {
+#showRelations {
     display: flex;
+}
+
+.valuesClass2 {
+    color: green;
 }
