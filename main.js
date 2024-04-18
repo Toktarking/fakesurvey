@@ -41,7 +41,8 @@ async function enter() {
 async function marking() {
     count = 0;
     count2 = 0;
-    console.log("Marking is on progress");
+    count3 = 0;
+
     var tableinfo = document.getElementById("table_info");
     var respondents_q = document.getElementById("respondents").value;
 
@@ -69,6 +70,7 @@ async function marking() {
     var loko = document.querySelectorAll(".valuesClass");
     loko.forEach(element => {
         initials = String(element.value).substring(0,2);
+        initial_first = ""
         numbers = String(element.value).substring(2, 3);
         relPosition = String(element.value).substring(4, 5);
         
@@ -76,10 +78,11 @@ async function marking() {
             input_cell = document.createElement("input");
             input_cell.setAttribute('type', 'text');
             input_cell.setAttribute('placeholder', "");
-            
-            
             input_cell.setAttribute('id', `mr${count2+1}`);
             count2++;
+            if (count3 == 0) {
+                initial_first = initials
+            } 
             
             let row2 = table1.insertRow();
             row2.setAttribute('id', `row${count+2}`);
@@ -88,33 +91,44 @@ async function marking() {
             let cell = row2.insertCell();
             let cell2 = row2.insertCell();
             cell.innerHTML = `${initials}${i+1}`;
-            if (initials == "dt"){
+            if (initials == initial_first){
                 input_cell.setAttribute('class', 'valuesClass2');
-            } 
+            }; 
             cell2.appendChild(input_cell);
             count++;
 
-            
-            console.log('Here is rel:');
-            console.log(`rel${i}`);
 
-            console.log('Here is i:');
-            console.log(i);
+            
+
+            
+
+
 
             if (i == relPosition-1) {
-
-                console.log("equal")
-                
                 var heretoput = document.getElementById(`rel${i}`);
                 var t = document.createTextNode(initials);
                 var text_place = document.createElement("p");
                 text_place.setAttribute("class", `svyaz${i+1}`)
                 text_place.appendChild(t);
                 heretoput.appendChild(text_place);
-            }
+            };
+
+
+
         };
+        count3++;
+
+        if (initials == initial_first){
+            hopino = table1.insertRow();
+            hopino.setAttribute('id', `row${count+2}`);
+            sopino = hopino.insertCell();
+            sopino.innerHTML = `${initials}Total`
+            count++;
+        }; 
+        
 
     }); 
+
     
     tableinfo.appendChild(table1);  
 }
@@ -125,8 +139,11 @@ async function falsify() {
     var respondents = document.getElementById("respondents").value;
     polo = document.getElementById("dispersion_value").value;
     polo = Number(polo);
+    var sum = 0
+    var average = 0
+    count_for_avg = 0
 
-    for (let q=2; q < count2+2; q++) {
+    for (let q=2; q < 5; q++) {
         for (let t=0; t < respondents; t++) {
 
             row_number = q;
@@ -136,9 +153,51 @@ async function falsify() {
 
             res = getRandomInt(marko-polo, marko+polo, marko);
             hello2(Number(res), row_number);
+            sum = sum + marko;
+            count_for_avg++;
 
         };
     };
+    
+    new_cell = document.getElementById(`row${row_number+1}`);
+    let cell = new_cell.insertCell();
+
+    cell.innerHTML = Math.round(sum/count_for_avg);
+    cell.setAttribute('id', 'totalvariable'); 
+    for (let t=0; t < respondents; t++) {
+        resp = t+1;
+
+        marko = Math.round(sum/count_for_avg);
+        stat_div = getRandomInt2();
+
+        res = getRandomInt(marko-polo, marko+polo, marko);
+        hello3(Number(res), row_number+1, resp);
+
+    };
+    totalvariable = parseInt(document.getElementById('totalvariable').innerHTML);
+    for (let r = 4; r<count2+2; r++) {
+        for (let l=0; l<respondents; l++) {
+            row4 = document.getElementById(`row${r+2}`);
+            mr = parseInt(document.getElementById(`mr${r}`).value);
+            totalnum = parseInt(document.getElementById(`total${l+1}`).innerHTML);
+            let cell3 = row4.insertCell();
+            var minus = totalvariable - mr;
+            console.log(mr);
+            console.log(totalvariable);
+            var value = totalnum - minus;
+            if (value < 1) {
+                value = 1;
+            };
+            if (value > 5) {
+                value = 5;
+            };
+
+            var value_res = getRandomInt(value-polo, value+polo, value);
+            cell3.innerHTML = value_res;
+
+        }
+    };
+
      
 }
 
@@ -147,16 +206,15 @@ async function falsify() {
 function getRandomInt(min, max, marko) {
     x = Math.random();
     x = Math.round(x*100);
-    console.log("////////////////////");
-    console.log(x);
+
     if (x <= 5) {
         min = 1;
         max = 5;
-        console.log("b")
+
     } else if (x > 5 && x <= 28) {
         min = Math.ceil(min);
         max = Math.floor(max);
-        console.log("a");
+
     } else {
         min = marko;
         max = marko;
@@ -195,6 +253,14 @@ async function hello() {
 async function hello2(item, row_number) {
     new_cell = document.getElementById(`row${row_number}`);
     let cell = new_cell.insertCell();
+
+    cell.innerHTML = item;
+}
+
+async function hello3(item, row_number, resp) {
+    new_cell = document.getElementById(`row${row_number}`);
+    let cell = new_cell.insertCell();
+    cell.setAttribute("id", `total${resp}`)
 
     cell.innerHTML = item;
 }
